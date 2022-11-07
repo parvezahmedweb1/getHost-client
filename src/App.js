@@ -1,10 +1,11 @@
 import React from "react";
+import Header from "./Shared/Header/Header";
 
 const App = () => {
   return (
-    <div className="container">
-      <h1 className="font-bold">Projects start</h1>
-    </div>
+    <>
+      <Header />
+    </>
   );
 };
 
