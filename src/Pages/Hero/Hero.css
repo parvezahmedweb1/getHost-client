@@ -1,0 +1,4 @@
+.hero-img {
+  border-radius: 100% 0% 100% 0% / 26% 74% 26% 74%;
+  object-fit: cover;
+}
