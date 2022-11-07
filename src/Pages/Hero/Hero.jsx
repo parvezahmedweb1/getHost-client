@@ -7,7 +7,7 @@ const Hero = () => {
     <section id="hero" className="h-[90vh]">
       <div className="container mx-auto h-full">
         <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="text-black md:text-center lg:text-left h-full flex  justify-center md:justify-center lg:justify-start py-6 md:py-6 lg:py-0 items-center">
+          <div className="text-black text-center lg:text-left h-full flex  justify-center md:justify-center lg:justify-start py-6 md:py-6 lg:py-0 items-center">
             <div>
               <h1 className="text-3xl md:text-5xl font-bold">
                 <span className="text-link">Powerful</span> Hosting,
