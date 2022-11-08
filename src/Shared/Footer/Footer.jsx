@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <footer aria-label="Site Footer" className="bg-link text-white">
       <div className="container mx-auto">
-        <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32 pt-5">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32 pt-5">
           <div className="mx-auto lg:mx-0">
             <img src={logo} alt="" width="140" />
 

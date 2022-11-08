@@ -27,9 +27,11 @@ const Header = () => {
                 <Link to="/contact">Contact</Link>
               </li>
               <span className="text-link">|</span>
-              <button className="btn-bg  font-semibold px-10 rounded-full py-2 text-white hover:text-hLink delay-100">
-                Sign In
-              </button>
+              <Link to="/login">
+                <button className="btn-bg  font-semibold px-10 rounded-full py-2 text-white hover:text-hLink delay-100">
+                  Sign In
+                </button>
+              </Link>
             </ul>
           </nav>
           {/* nav end */}

@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ServiceCard = ({ service, loading }) => {
-  const { serviceName, img, price } = service;
+  const { serviceName, img, price, _id } = service;
   return (
     <>
       {loading ? (
@@ -22,14 +23,11 @@ const ServiceCard = ({ service, loading }) => {
               <div className="text-gray-700">20 domains</div>
             </div>
           </div>
-          <div className="block">
-            <a
-              href="/"
-              className="inline-flex items-center justify-center w-full px-20 h-12 mt-6 font-bold tracking-wide text-white btn-bg rounded-lg hover:text-hLink"
-            >
+          <Link to={`/services/${_id}`} className="scroll-auto">
+            <button className="inline-flex items-center justify-center w-full px-20 h-12 mt-6 font-bold tracking-wide text-white btn-bg rounded-lg hover:text-hLink">
               View Details
-            </a>
-          </div>
+            </button>
+          </Link>
         </div>
       )}
     </>
