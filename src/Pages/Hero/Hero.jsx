@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import hero from "../../assets/hosting-image.jpg";
 import "./Hero.css";
@@ -37,11 +38,11 @@ const Hero = () => {
               <p className="my-4 text-slate-700">
                 Web Hosting made EASY and AFFORDABLE.
               </p>
-              <a href="/services">
+              <Link to="/services">
                 <button className="btn-bg text-white px-10 py-3 rounded-full font-bold hover:text-hLink transition-all delay-75">
                   View Services
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="md:h-[50vh] lg:h-[90vh] w-full md:mt-3 lg:mt-0 p-1">

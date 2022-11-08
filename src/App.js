@@ -1,14 +1,11 @@
 import React from "react";
-import Hero from "./Pages/Hero/Hero";
-import Footer from "./Shared/Footer/Footer";
-import Header from "./Shared/Header/Header";
+import { RouterProvider } from "react-router-dom";
+import router from "./Routes/Router";
 
 const App = () => {
   return (
     <>
-      <Header />
-      <Hero />
-      <Footer />
+      <RouterProvider router={router} />
     </>
   );
 };
