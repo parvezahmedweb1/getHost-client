@@ -8,7 +8,12 @@ import { toast } from "react-toastify";
 import signUp from "../../assets/loginandsignup/login.json";
 import { AuthContext } from "../../contexts/UserContext";
 const SignUp = () => {
-  const { googleSignIn, githubSignIn } = useContext(AuthContext);
+  const {
+    googleSignIn,
+    githubSignIn,
+    registerEmailAndPassword,
+    updateUserProfile,
+  } = useContext(AuthContext);
   // ? user info
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -45,9 +50,22 @@ const SignUp = () => {
   };
   // ? handleRegisterSubmit
   const handleRegisterSubmit = (e) => {
-    // const form = e.target;
+    const form = e.target;
     e.preventDefault();
-    // form.reset();
+    registerEmailAndPassword(userInfo.email, userInfo.password)
+      .then((result) => {
+        setError({ ...error, firebaseErr: "" });
+        // ? update user profile
+        updateUserProfile(userInfo.name, userInfo.photoURL)
+          .then(() => {
+            // ? update
+            toast.success("Successfully Created user");
+            console.log(result.user);
+          })
+          .catch((err) => {});
+      })
+      .catch((error) => setError({ ...error, firebaseErr: error.message }));
+    form.reset();
   };
   // ? handleGithubSignUp
   const handleGithubSignUp = () => {
@@ -253,7 +271,7 @@ const SignUp = () => {
             </div>
             <button
               type="submit"
-              className="block w-full rounded-lg btn-bg px-5 py-3 text-md font-semibold  text-white hover:text-hLink"
+              className="block w-full rounded-lg bg-link px-5 py-3 text-md font-semibold  text-white hover:text-hLink"
             >
               Sign Up
             </button>
