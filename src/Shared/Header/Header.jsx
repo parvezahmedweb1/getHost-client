@@ -29,6 +29,11 @@ const Header = () => {
               </li>
               {user?.uid && (
                 <li className="font-semibold text-link hover:text-hLink delay-100">
+                  <Link to="/review">My Review</Link>
+                </li>
+              )}
+              {user?.uid && (
+                <li className="font-semibold text-link hover:text-hLink delay-100">
                   <Link to="/addServices">Add Services</Link>
                 </li>
               )}

@@ -1,7 +1,8 @@
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import React from "react";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 import { Link } from "react-router-dom";
-
 const ServiceCard = ({ service, loading }) => {
   const { serviceName, img, price, _id } = service;
   return (
@@ -10,7 +11,11 @@ const ServiceCard = ({ service, loading }) => {
         "loading..."
       ) : (
         <div className="flex flex-col justify-between p-4 transition-shadow duration-300 bg-white border rounded-lg shadow-sm sm:items-center hover:shadow-2xl">
-          <img src={img} alt="" />
+          <PhotoProvider>
+            <PhotoView src={img}>
+              <img src={img} alt="" />
+            </PhotoView>
+          </PhotoProvider>
           <div className="text-center">
             <div className="text-lg font-semibold">{serviceName}</div>
             <div className="flex items-center justify-center mt-2">
