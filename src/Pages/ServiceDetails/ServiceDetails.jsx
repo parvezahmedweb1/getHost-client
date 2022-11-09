@@ -21,7 +21,7 @@ const ServiceDetails = () => {
         <h3 className="text-xl md:text-3xl font-semibold">Details</h3>
         <p className="mt-4 text-slate-700">{details}</p>
       </div>
-      <article className="rounded-xl bg-gradient-to-r btn-bg p-0.5 text-center shadow-sm transition hover:shadow-xl md:w-10/12 lg:w-1/2 mx-auto">
+      <article className="rounded-xl mb-10 bg-gradient-to-r btn-bg p-0.5 text-center shadow-sm transition hover:shadow-xl md:w-10/12 lg:w-1/2 mx-auto">
         <h3 className="text-xl md:text-3xl font-semibold text-white my-4">
           Add Review
         </h3>

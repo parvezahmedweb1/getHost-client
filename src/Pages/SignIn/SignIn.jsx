@@ -1,11 +1,14 @@
 import Lottie from "lottie-react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BiErrorCircle } from "react-icons/bi";
 import { BsGithub } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import signIn from "../../assets/loginandsignup/login-page.json";
+import { AuthContext } from "../../contexts/UserContext";
 const SignIn = () => {
+  const { googleSignIn, githubSignIn } = useContext(AuthContext);
   // ? user info
   const [userInfo, setUserInfo] = useState({
     email: "",
@@ -37,11 +40,19 @@ const SignIn = () => {
   };
   // ? handleGithubSignIn
   const handleGithubSignIn = () => {
-    console.log("click git");
+    githubSignIn()
+      .then((result) => {
+        toast.success("Successfully GitHub SignIn");
+      })
+      .catch((error) => setError({ ...error, firebaseErr: error.message }));
   };
   // ? handleGoogleSignIn
   const handleGoogleSignIn = () => {
-    console.log("click google");
+    googleSignIn()
+      .then((result) => {
+        toast.success("Successfully Google SignIn");
+      })
+      .catch((error) => setError({ ...error, firebaseErr: error.message }));
   };
   return (
     <section className="bg-slate-50">

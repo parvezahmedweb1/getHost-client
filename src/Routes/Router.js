@@ -1,11 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
+import AddService from "../Pages/AddService/AddService";
 import Blogs from "../Pages/Blogs/Blogs";
 import Home from "../Pages/Home/Home";
 import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
 import Services from "../Pages/Services/Services";
 import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
+import PrivateRoute from "./PrivateRoute";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs />,
+      },
+      {
+        path: "/addServices",
+        element: (
+          <PrivateRoute>
+            <AddService />
+          </PrivateRoute>
+        ),
       },
     ],
   },
