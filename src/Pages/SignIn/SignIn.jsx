@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import signIn from "../../assets/loginandsignup/login-page.json";
 import { AuthContext } from "../../contexts/UserContext";
+import useTitle from "../../Hooks/useTitle";
 const SignIn = () => {
+  useTitle("Sign In");
   const { googleSignIn, githubSignIn } = useContext(AuthContext);
   // ? user info
   const [userInfo, setUserInfo] = useState({

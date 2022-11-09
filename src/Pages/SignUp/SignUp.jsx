@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import signUp from "../../assets/loginandsignup/login.json";
 import { AuthContext } from "../../contexts/UserContext";
+import useTitle from "../../Hooks/useTitle";
 const SignUp = () => {
+  useTitle("Sign Up");
   const {
     googleSignIn,
     githubSignIn,

@@ -1,25 +1,40 @@
-import React, { useState } from "react";
+import React from "react";
+import { toast } from "react-toastify";
 import bannerS from "../../assets/services/customer.webp";
+import useTitle from "../../Hooks/useTitle";
 const AddService = () => {
-  const [service, setService] = useState({
-    name: "",
-    price: "",
-    img: "",
-    details: "",
-  });
+  useTitle("Add Service");
   // ? handleSubmit
   const handleSubmit = (e) => {
     const form = e.target;
     e.preventDefault();
 
-    const name = form.name.value;
+    const serviceName = form.name.value;
     const price = form.price.value;
     const img = form.photo.value;
     const details = form.details.value;
-    setService({ name, price, img, details });
-    // form.reset();
+    const service = {
+      serviceName,
+      img,
+      details,
+      price,
+    };
+    // ? db post request
+    fetch("http://localhost:5000/services", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(service),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          toast.success("Successfully Service Added");
+        }
+      });
+    form.reset();
   };
-  console.log(service);
   return (
     <section className="container mx-auto">
       <div className="services-header w-full rounded-lg">

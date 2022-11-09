@@ -1,11 +1,13 @@
 import React from "react";
 import img from "../../assets/ceo.png";
+import useTitle from "../../Hooks/useTitle";
 const Contact = () => {
+  useTitle("Contact");
   return (
     <section className="container mx-auto btn-bg my-20 rounded-2xl">
       <div className="grid max-w-6xl grid-cols-1 items-center px-6 mx-auto lg:px-8 md:grid-cols-2 ">
         <div className="text-white mt-10 md:mt-0">
-          <h1 className="text-4xl font-bold">Get in touch</h1>
+          <h1 className="text-5xl font-bold">Get in touch</h1>
           <p className="pt-2 pb-4">Fill in the form to start a conversation</p>
           <div className="space-y-4">
             <p className="flex items-center">

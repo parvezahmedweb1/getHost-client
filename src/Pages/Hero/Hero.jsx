@@ -1,3 +1,4 @@
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
@@ -39,8 +40,11 @@ const Hero = () => {
                 Web Hosting made EASY and AFFORDABLE.
               </p>
               <Link to="/services">
-                <button className="btn-bg text-white px-10 py-3 rounded-full font-bold hover:text-hLink transition-all delay-75">
-                  View Services
+                <button className="btn-bg flex items-center text-white px-10 py-3 rounded-full font-bold hover:text-hLink transition-all delay-75">
+                  View Services{" "}
+                  <span>
+                    <ArrowTopRightOnSquareIcon className="w-5 h-5 ml-1" />
+                  </span>
                 </button>
               </Link>
             </div>

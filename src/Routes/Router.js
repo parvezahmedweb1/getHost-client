@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import AddService from "../Pages/AddService/AddService";
 import Blogs from "../Pages/Blogs/Blogs";
+import Contact from "../Pages/Contact/Contact";
 import Home from "../Pages/Home/Home";
 import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
 import Services from "../Pages/Services/Services";
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
             <AddService />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
     ],
   },

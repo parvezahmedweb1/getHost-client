@@ -1,8 +1,10 @@
 import React from "react";
+import useTitle from "../../Hooks/useTitle";
 import ServicesContainer from "../Others/ServicesContainer/ServicesContainer";
 import ServicesHeader from "../ServicesHeader/ServicesHeader";
 
 const Services = () => {
+  useTitle("Services");
   return (
     <section>
       <div className="container mx-auto">

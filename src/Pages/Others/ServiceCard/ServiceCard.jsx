@@ -1,3 +1,4 @@
+import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -25,7 +26,10 @@ const ServiceCard = ({ service, loading }) => {
           </div>
           <Link to={`/services/${_id}`} className="scroll-auto">
             <button className="inline-flex items-center justify-center w-full px-20 h-12 mt-6 font-bold tracking-wide text-white btn-bg rounded-lg hover:text-hLink">
-              View Details
+              View Details{" "}
+              <span>
+                <ArrowRightIcon className="w-4 h-4 ml-2" />
+              </span>
             </button>
           </Link>
         </div>

@@ -1,6 +1,8 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import useTitle from "../../Hooks/useTitle";
 const ServiceDetails = () => {
+  useTitle("Service Details");
   const data = useLoaderData();
   const { serviceName, details, img } = data.service;
   return (

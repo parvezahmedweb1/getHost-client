@@ -1,3 +1,7 @@
+import {
+  ArrowLeftOnRectangleIcon,
+  ArrowRightOnRectangleIcon,
+} from "@heroicons/react/24/solid";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/Hosting-logo.png";
@@ -50,14 +54,20 @@ const Header = () => {
               {user?.uid ? (
                 <button
                   onClick={logout}
-                  className="bg-hLink  font-semibold px-10 rounded-full py-2 text-white hover:bg-link delay-100"
+                  className="bg-hLink flex items-center font-semibold px-10 rounded-full py-2 text-white hover:bg-link delay-100"
                 >
-                  Logout
+                  Logout{" "}
+                  <span>
+                    <ArrowLeftOnRectangleIcon className="w-5 h-5 ml-1" />
+                  </span>
                 </button>
               ) : (
                 <Link to="/login">
-                  <button className="btn-bg  font-semibold px-10 rounded-full py-2 text-white hover:text-hLink delay-100">
-                    Sign In
+                  <button className="btn-bg flex items-center font-semibold px-10 rounded-full py-2 text-white hover:text-hLink delay-100">
+                    Sign In{" "}
+                    <span>
+                      <ArrowRightOnRectangleIcon className="w-5 h-5 ml-1" />
+                    </span>
                   </button>
                 </Link>
               )}
