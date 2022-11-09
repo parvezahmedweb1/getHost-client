@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/Hosting-logo.png";
+import userImg from "../../assets/user.png";
+import { AuthContext } from "../../contexts/UserContext";
 import NavMobile from "../../Pages/Others/NavMobile/NavMobile";
 import "./Header.css";
 const Header = () => {
+  const { user, logout } = useContext(AuthContext);
   return (
     <header className="h-16 flex items-center">
       <div className="container mx-auto">
@@ -20,6 +23,11 @@ const Header = () => {
               <li className="font-semibold text-link hover:text-hLink delay-100">
                 <Link to="/services">Services</Link>
               </li>
+              {user?.uid && (
+                <li className="font-semibold text-link hover:text-hLink delay-100">
+                  <Link to="/addServices">Add Services</Link>
+                </li>
+              )}
               <li className="font-semibold text-link hover:text-hLink delay-100">
                 <Link to="/blogs">Blogs</Link>
               </li>
@@ -27,11 +35,32 @@ const Header = () => {
                 <Link to="/contact">Contact</Link>
               </li>
               <span className="text-link">|</span>
-              <Link to="/login">
-                <button className="btn-bg  font-semibold px-10 rounded-full py-2 text-white hover:text-hLink delay-100">
-                  Sign In
+              {user?.uid && (
+                <>
+                  <img
+                    title={user.displayName}
+                    className="mr-5 rounded-full cursor-pointer"
+                    src={user?.photoURL ? user.photoURL : userImg}
+                    width="40"
+                    alt=""
+                  />
+                  <span className="text-link">|</span>
+                </>
+              )}
+              {user?.uid ? (
+                <button
+                  onClick={logout}
+                  className="bg-hLink  font-semibold px-10 rounded-full py-2 text-white hover:bg-link delay-100"
+                >
+                  Logout
                 </button>
-              </Link>
+              ) : (
+                <Link to="/login">
+                  <button className="btn-bg  font-semibold px-10 rounded-full py-2 text-white hover:text-hLink delay-100">
+                    Sign In
+                  </button>
+                </Link>
+              )}
             </ul>
           </nav>
           {/* nav end */}

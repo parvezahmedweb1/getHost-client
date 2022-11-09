@@ -1,10 +1,48 @@
 import Lottie from "lottie-react";
-import React from "react";
+import React, { useState } from "react";
+import { BiErrorCircle } from "react-icons/bi";
 import { BsGithub } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import signIn from "../../assets/loginandsignup/login-page.json";
 const SignIn = () => {
+  // ? user info
+  const [userInfo, setUserInfo] = useState({
+    email: "",
+    password: "",
+  });
+  // ? password error
+  const [error, setError] = useState({
+    password: "",
+    firebaseErr: "",
+  });
+  // ? handleUserEmail
+  const handleUserEmail = (e) => {
+    setUserInfo({ ...userInfo, email: e.target.value });
+  };
+  // ? handleUserPassword
+  const handleUserPassword = (e) => {
+    if (e.target.value.length < 6) {
+      setError({ ...error, password: "Must be at least 6 characters" });
+      setUserInfo({ ...userInfo, password: e.target.value });
+    } else {
+      setError({ ...error, password: "" });
+      setUserInfo({ ...userInfo, password: e.target.value });
+    }
+  };
+  // ? handleLogin
+  const handleLogin = (e) => {
+    console.log(userInfo);
+    e.preventDefault();
+  };
+  // ? handleGithubSignIn
+  const handleGithubSignIn = () => {
+    console.log("click git");
+  };
+  // ? handleGoogleSignIn
+  const handleGoogleSignIn = () => {
+    console.log("click google");
+  };
   return (
     <section className="bg-slate-50">
       <div className="container mx-auto">
@@ -15,7 +53,7 @@ const SignIn = () => {
             loop={true}
           ></Lottie>
           <form
-            action=""
+            onSubmit={handleLogin}
             className="my-10 space-y-4 rounded-xl p-8 shadow-2xl w-[90%] md:w-[65%] mx-auto"
           >
             <p className="font-bold text-4xl">Sign in</p>
@@ -26,11 +64,17 @@ const SignIn = () => {
               </Link>
             </p>
             <div className="flex space-x-6">
-              <div className="border p-2 rounded-full cursor-pointer">
+              <div
+                onClick={handleGithubSignIn}
+                className="border p-2 rounded-full cursor-pointer"
+              >
                 <BsGithub size={26} />
               </div>
 
-              <div className="border p-2 rounded-full cursor-pointer">
+              <div
+                onClick={handleGoogleSignIn}
+                className="border p-2 rounded-full cursor-pointer"
+              >
                 <FcGoogle size={26} />
               </div>
             </div>
@@ -42,6 +86,7 @@ const SignIn = () => {
 
               <div className="relative mt-1">
                 <input
+                  onBlur={handleUserEmail}
                   type="email"
                   id="email"
                   className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
@@ -73,6 +118,7 @@ const SignIn = () => {
 
               <div className="relative mt-1">
                 <input
+                  onChange={handleUserPassword}
                   type="password"
                   id="password"
                   className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
@@ -104,6 +150,18 @@ const SignIn = () => {
               <p className="text-right text-slate-700 text-sm mt-1">
                 Forget password?
               </p>
+              {error.password && (
+                <small className="text-xs flex items-center mt-2 text-yellow-700 dark:text-gray-400 ">
+                  <BiErrorCircle className="mr-1" />
+                  {error.password}
+                </small>
+              )}
+              {error.firebaseErr && (
+                <span className="text-xs mt-2 flex items-center text-red-900 dark:text-gray-400">
+                  <BiErrorCircle className="mr-1" />
+                  {error.firebaseErr}
+                </span>
+              )}
             </div>
             <button
               type="submit"

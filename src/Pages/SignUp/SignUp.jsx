@@ -1,11 +1,14 @@
 import Lottie from "lottie-react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BiErrorCircle } from "react-icons/bi";
 import { BsGithub } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import signUp from "../../assets/loginandsignup/login.json";
+import { AuthContext } from "../../contexts/UserContext";
 const SignUp = () => {
+  const { googleSignIn, githubSignIn } = useContext(AuthContext);
   // ? user info
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -46,6 +49,22 @@ const SignUp = () => {
     e.preventDefault();
     // form.reset();
   };
+  // ? handleGithubSignUp
+  const handleGithubSignUp = () => {
+    githubSignIn()
+      .then((result) => {
+        toast.success("Successfully Github SignUp");
+      })
+      .catch((err) => setError({ ...err, firebaseErr: err.message }));
+  };
+  // ? handleGoogleSignUp
+  const handleGoogleSignUp = () => {
+    googleSignIn()
+      .then((result) => {
+        toast.success("Successfully Google SignUp");
+      })
+      .catch((err) => setError({ ...err, firebaseErr: err.message }));
+  };
   return (
     <section className="bg-slate-50">
       <div className="container mx-auto">
@@ -67,11 +86,17 @@ const SignUp = () => {
               </Link>
             </p>
             <div className="flex space-x-6">
-              <div className="border p-2 rounded-full cursor-pointer">
+              <div
+                onClick={handleGithubSignUp}
+                className="border p-2 rounded-full cursor-pointer"
+              >
                 <BsGithub size={26} />
               </div>
 
-              <div className="border p-2 rounded-full cursor-pointer">
+              <div
+                onClick={handleGoogleSignUp}
+                className="border p-2 rounded-full cursor-pointer"
+              >
                 <FcGoogle size={26} />
               </div>
             </div>
@@ -178,7 +203,7 @@ const SignUp = () => {
                 Forget password?
               </p>
               {error.password && (
-                <small className="text-xs flex items-center mt-2 text-yellow-400 dark:text-gray-400 ">
+                <small className="text-xs flex items-center mt-2 text-yellow-700 dark:text-gray-400 ">
                   <BiErrorCircle className="mr-1" />
                   {error.password}
                 </small>
