@@ -1,6 +1,29 @@
 import React from "react";
+import { useLoaderData } from "react-router-dom";
 
 const UpdateReview = () => {
+  const products = useLoaderData();
+  console.log(products);
+  /* const handleUpdate = (e) => {
+    e.preventDefault();
+    e.preventDefault();
+    const product = {
+      name: e.target.name.value,
+      price: parseInt(e.target.price.value),
+      image: e.target.image.value,
+    };
+    fetch(`http://localhost:5000/update/${router.id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        Navigate("/reviews");
+      });
+  }; */
   return (
     <div className="container mx-auto my-10">
       <article className="rounded-xl mb-10 bg-gradient-to-r btn-bg p-0.5 text-center shadow-sm transition hover:shadow-xl md:w-10/12 lg:w-1/2 mx-auto">

@@ -1,12 +1,16 @@
 import { StarIcon } from "@heroicons/react/24/solid";
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
 
 const Review = ({ userReview, handleDelete }) => {
+  const navigate = useNavigate();
   const { name, useEmail, serviceName, photoURl, rating, review, _id } =
     userReview;
   const { user } = useContext(AuthContext);
+  const handleUpdate = (id) => {
+    navigate(`/update/${id}`);
+  };
   return (
     <div className="rounded-md shadow-md sm:w-96 dark:bg-gray-900 dark:text-gray-100">
       <div className="flex items-center justify-between p-3">
@@ -41,27 +45,26 @@ const Review = ({ userReview, handleDelete }) => {
           <span className="text-link">"</span>
         </p>
         <span className="inline-flex divide-x overflow-hidden rounded-md border bg-white shadow-sm">
-          <Link to="/update">
-            <button
-              className="inline-block p-3 px-10 text-gray-700 hover:bg-gray-50 focus:relative"
-              title="Edit Product"
+          <button
+            onClick={() => handleUpdate(_id)}
+            className="inline-block p-3 px-10 text-gray-700 hover:bg-gray-50 focus:relative"
+            title="Edit Product"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="h-4 w-4 text-yellow-400"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="h-4 w-4 text-yellow-400"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                />
-              </svg>
-            </button>
-          </Link>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+              />
+            </svg>
+          </button>
           <button
             onClick={() => handleDelete(_id)}
             className="inline-block p-3 px-10 text-gray-700 hover:bg-gray-50 focus:relative"
