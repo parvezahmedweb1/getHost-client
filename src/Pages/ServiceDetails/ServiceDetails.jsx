@@ -1,13 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/UserContext";
 import useTitle from "../../Hooks/useTitle";
+import ServiceReview from "../ServiceReview/ServiceReview";
+
 const ServiceDetails = () => {
   useTitle("Service Details");
   const { user } = useContext(AuthContext);
   const data = useLoaderData();
+  const [reviews, setReviews] = useState([]);
+
   const { serviceName, details, img, _id } = data.service;
+  useEffect(() => {
+    fetch(`http://localhost:5000/reviews?email=${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setReviews(data);
+      });
+  }, [user?.email, reviews]);
   const handleReview = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -41,6 +52,7 @@ const ServiceDetails = () => {
       })
       .catch((er) => console.error(er));
   };
+
   return (
     <section className=" container mx-auto w-full ">
       <div className="services-header rounded-lg">
@@ -59,10 +71,23 @@ const ServiceDetails = () => {
         <h3 className="text-xl md:text-3xl font-semibold">Details</h3>
         <p className="mt-4 text-slate-700">{details}</p>
       </div>
+
+      {reviews.length > 0 && (
+        <div className="my-10 bg-slate-50">
+          <div className="container mx-auto my-10 py-10">
+            <h3 className="text-xl md:text-3xl font-semibold mb-6">
+              My Review
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {reviews.map((review) => (
+                <ServiceReview key={review._id} userReview={review} />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
       <article className="rounded-xl mb-10 bg-gradient-to-r btn-bg p-0.5 text-center shadow-sm transition hover:shadow-xl md:w-10/12 lg:w-1/2 mx-auto">
-        <h3 className="text-xl md:text-3xl font-semibold text-white my-4">
-          Add Review
-        </h3>
+        <h3 className="text-xl md:text-3xl font-semibold">Add Review</h3>
         <div className="rounded-[10px] bg-white p-4">
           <div className="flex flex-col">
             <div className="flex flex-col items-center w-full">

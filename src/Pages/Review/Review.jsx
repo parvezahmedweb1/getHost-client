@@ -2,9 +2,11 @@ import { StarIcon } from "@heroicons/react/24/solid";
 import React, { useContext } from "react";
 import { AuthContext } from "../../contexts/UserContext";
 
-const Review = ({ userReview }) => {
-  const { name, useEmail, serviceName, photoURl, rating, review } = userReview;
+const Review = ({ userReview, handleDelete }) => {
+  const { name, useEmail, serviceName, photoURl, rating, review, _id } =
+    userReview;
   const { user } = useContext(AuthContext);
+
   return (
     <div className="rounded-md shadow-md sm:w-96 dark:bg-gray-900 dark:text-gray-100">
       <div className="flex items-center justify-between p-3">
@@ -60,6 +62,7 @@ const Review = ({ userReview }) => {
           </button>
 
           <button
+            onClick={() => handleDelete(_id)}
             className="inline-block p-3 px-10 text-gray-700 hover:bg-gray-50 focus:relative"
             title="Delete Product"
           >

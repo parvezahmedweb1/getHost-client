@@ -16,14 +16,38 @@ const MyReview = () => {
         setLoading(false);
       });
   }, [user?.email]);
-  console.log(reviews);
+  const handleDelete = (id) => {
+    const proceed = window.confirm("Are you sure, you want to delete review?");
+    if (proceed) {
+      fetch(`http://localhost:5000/reviews/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            alert("deleted successfully");
+            const remaining = reviews.filter((review) => review._id !== id);
+            setReviews(remaining);
+          }
+        });
+    }
+  };
   return (
     <section>
       {loading && <Spanner />}
       <div className="container mx-auto my-10">
+        {reviews.length === 0 && (
+          <h2 className=" text-2xl text-center  md:text-4xl text-slate-700 font-bold">
+            Review is not found, Please add Review.
+          </h2>
+        )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews.map((review) => (
-            <Review key={review._id} userReview={review} />
+            <Review
+              key={review._id}
+              userReview={review}
+              handleDelete={handleDelete}
+            />
           ))}
         </div>
       </div>
