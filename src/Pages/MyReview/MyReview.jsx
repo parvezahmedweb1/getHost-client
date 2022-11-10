@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/UserContext";
+import useTitle from "../../Hooks/useTitle";
 import Spanner from "../Others/Spanner/Spanner";
 import Review from "../Review/Review";
 
 const MyReview = () => {
+  useTitle("Reviews");
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
