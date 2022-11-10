@@ -6,7 +6,7 @@ const ServicesContainer = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/services")
+    fetch("https://gethost-server.vercel.app/services")
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

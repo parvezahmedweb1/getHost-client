@@ -4,6 +4,7 @@ import AddService from "../Pages/AddService/AddService";
 import Blogs from "../Pages/Blogs/Blogs";
 import Contact from "../Pages/Contact/Contact";
 import Home from "../Pages/Home/Home";
+import MyReview from "../Pages/MyReview/MyReview";
 import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
 import Services from "../Pages/Services/Services";
 import SignIn from "../Pages/SignIn/SignIn";
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
       {
         path: "/services/:id",
         loader: async ({ params }) =>
-          fetch(`http://localhost:5000/services/${params.id}`),
+          fetch(`https://gethost-server.vercel.app/services/${params.id}`),
         element: <ServiceDetails />,
       },
       {
@@ -49,6 +50,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddService />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/review",
+        element: (
+          <PrivateRoute>
+            <MyReview />
           </PrivateRoute>
         ),
       },

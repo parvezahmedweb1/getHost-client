@@ -7,7 +7,7 @@ const ServicesHome = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/limit")
+    fetch("https://gethost-server.vercel.app/limit")
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

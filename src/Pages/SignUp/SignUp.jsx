@@ -3,13 +3,16 @@ import React, { useContext, useState } from "react";
 import { BiErrorCircle } from "react-icons/bi";
 import { BsGithub } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import signUp from "../../assets/loginandsignup/login.json";
 import { AuthContext } from "../../contexts/UserContext";
 import useTitle from "../../Hooks/useTitle";
 const SignUp = () => {
   useTitle("Sign Up");
+  const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
   const {
     googleSignIn,
     githubSignIn,
@@ -62,7 +65,7 @@ const SignUp = () => {
           .then(() => {
             // ? update
             toast.success("Successfully Created user");
-            console.log(result.user);
+            navigate(from, { replace: true });
           })
           .catch((err) => {});
       })

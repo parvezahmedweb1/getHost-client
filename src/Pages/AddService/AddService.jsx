@@ -20,7 +20,7 @@ const AddService = () => {
       price,
     };
     // ? db post request
-    fetch("http://localhost:5000/services", {
+    fetch("https://gethost-server.vercel.app/services", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -1,8 +1,18 @@
-import React from "react";
-import { useLoaderData } from "react-router-dom";
+import React, { useContext } from "react";
+import {
+  Link,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import { AuthContext } from "../../contexts/UserContext";
 import useTitle from "../../Hooks/useTitle";
 const ServiceDetails = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(location);
   useTitle("Service Details");
+  const { user } = useContext(AuthContext);
   const data = useLoaderData();
   const { serviceName, details, img } = data.service;
   return (
@@ -30,33 +40,63 @@ const ServiceDetails = () => {
         <div className="rounded-[10px] bg-white p-4">
           <div className="flex flex-col">
             <div className="flex flex-col items-center w-full">
-              <h2 className="text-3xl font-semibold text-center mb-4">
-                {serviceName}
-              </h2>
-              <form className="w-full">
-                <div className="mb-4">
-                  <input
+              {user ? (
+                <form className="w-full">
+                  <div className="mb-4">
+                    <input
+                      className="p-4 rounded-md border w-full"
+                      placeholder="Name"
+                      type="text"
+                      id="name"
+                      value={serviceName}
+                      readOnly
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <input
+                      className="p-4 rounded-md border w-full"
+                      placeholder="Photo URL"
+                      type="text"
+                      value={img}
+                      id="photo"
+                      readOnly
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <input
+                      className="p-4 rounded-md border w-full"
+                      placeholder="Rating Point"
+                      type="number"
+                      name="rating"
+                      id="rating"
+                    />
+                  </div>
+                  <textarea
+                    rows="3"
+                    placeholder="Message..."
                     className="p-4 rounded-md border w-full"
-                    placeholder="Name"
-                    type="text"
-                    id="name"
-                  />
-                </div>
-                <div className="mb-4">
-                  <input
-                    className="p-4 rounded-md border w-full"
-                    placeholder="Email"
-                    type="email"
-                    id="email"
-                  />
-                </div>
-                <textarea
-                  rows="3"
-                  placeholder="Message..."
-                  className="p-4 rounded-md border w-full"
-                ></textarea>
-              </form>
-              <div className="flex flex-col items-center space-y-3">
+                  ></textarea>
+                  <button
+                    type="submit"
+                    className="block w-full rounded-lg bg-link px-5 py-3 text-md font-semibold  text-white hover:text-hLink"
+                  >
+                    Add Review
+                  </button>
+                </form>
+              ) : (
+                <>
+                  <h3 className="text-xl md:text-3xl font-semibold text-red-700 my-4">
+                    Please Login To Add a Review !!!
+                  </h3>
+                  <Link
+                    to="/login"
+                    className="block w-full rounded-lg bg-link px-5 py-3 text-md font-semibold  text-white hover:text-hLink"
+                  >
+                    <button type="submit">Sign in</button>
+                  </Link>
+                </>
+              )}
+              {/* <div className="flex flex-col items-center space-y-3">
                 <span className="text-center">How was your experience?</span>
                 <div className="flex space-x-3">
                   <button
@@ -133,7 +173,7 @@ const ServiceDetails = () => {
                 <button className="btn-bg block w-full py-4 rounded-full font-bold text-white text-md hover:text-hLink">
                   Send
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
