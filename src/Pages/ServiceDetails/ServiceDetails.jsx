@@ -13,7 +13,7 @@ const ServiceDetails = () => {
 
   const { serviceName, details, img, _id } = data.service;
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?email=${user?.email}`)
+    fetch(`https://gethost-server.vercel.app/reviews?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);
@@ -35,7 +35,7 @@ const ServiceDetails = () => {
       rating,
       review,
     };
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://gethost-server.vercel.app/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",
