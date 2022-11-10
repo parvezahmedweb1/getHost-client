@@ -17,9 +17,10 @@ Code Link: [github](https://github.com/Porgramming-Hero-web-course/b6a11-service
 ## Features
 
 - firebase authentication with email, password, google sign in and github sign in.
-- There are many courses in this website.
-- If user click on course details private route redirects to the login page if the user is not logged in.
-- After login, the user will be redirected to the checkout page.
+- There are some services in services page.
+- User can add new services.
+- User can add service review.
+- User can update and delete the service.
 - Responsive for mobile & desktop.
 
 ## Technology
