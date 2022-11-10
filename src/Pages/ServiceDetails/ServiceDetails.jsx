@@ -1,20 +1,46 @@
 import React, { useContext } from "react";
-import {
-  Link,
-  useLoaderData,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/UserContext";
 import useTitle from "../../Hooks/useTitle";
 const ServiceDetails = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  console.log(location);
   useTitle("Service Details");
   const { user } = useContext(AuthContext);
   const data = useLoaderData();
-  const { serviceName, details, img } = data.service;
+  const { serviceName, details, img, _id } = data.service;
+  const handleReview = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = e.target.serviceName.value;
+    const photoURl = e.target.photoURL.value;
+    const rating = e.target.rating.value;
+    const review = e.target.review.value;
+    const userReview = {
+      name: user?.displayName,
+      useEmail: user?.email,
+      serviceId: _id,
+      serviceName: name,
+      photoURl,
+      rating,
+      review,
+    };
+    fetch("http://localhost:5000/reviews", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userReview),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          toast.success("Review Added successfully");
+          form.reset();
+        }
+      })
+      .catch((er) => console.error(er));
+  };
   return (
     <section className=" container mx-auto w-full ">
       <div className="services-header rounded-lg">
@@ -41,12 +67,13 @@ const ServiceDetails = () => {
           <div className="flex flex-col">
             <div className="flex flex-col items-center w-full">
               {user ? (
-                <form className="w-full">
+                <form onSubmit={handleReview} className="w-full">
                   <div className="mb-4">
                     <input
                       className="p-4 rounded-md border w-full"
                       placeholder="Name"
                       type="text"
+                      name="serviceName"
                       id="name"
                       value={serviceName}
                       readOnly
@@ -57,6 +84,7 @@ const ServiceDetails = () => {
                       className="p-4 rounded-md border w-full"
                       placeholder="Photo URL"
                       type="text"
+                      name="photoURL"
                       value={img}
                       id="photo"
                       readOnly
@@ -74,6 +102,7 @@ const ServiceDetails = () => {
                   <textarea
                     rows="3"
                     placeholder="Message..."
+                    name="review"
                     className="p-4 rounded-md border w-full"
                   ></textarea>
                   <button

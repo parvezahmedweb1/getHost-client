@@ -3,14 +3,18 @@ import React, { useContext, useState } from "react";
 import { BiErrorCircle } from "react-icons/bi";
 import { BsGithub } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import signIn from "../../assets/loginandsignup/login-page.json";
 import { AuthContext } from "../../contexts/UserContext";
 import useTitle from "../../Hooks/useTitle";
 const SignIn = () => {
   useTitle("Sign In");
-  const { googleSignIn, githubSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+  const { googleSignIn, githubSignIn, loginWithEmailAndPassword } =
+    useContext(AuthContext);
   // ? user info
   const [userInfo, setUserInfo] = useState({
     email: "",
@@ -37,8 +41,16 @@ const SignIn = () => {
   };
   // ? handleLogin
   const handleLogin = (e) => {
-    console.log(userInfo);
+    const form = e.target;
     e.preventDefault();
+    // ? login user
+    loginWithEmailAndPassword(userInfo.email, userInfo.password)
+      .then((result) => {
+        toast.success("Successfully User Login");
+        navigate(from, { replace: true });
+      })
+      .catch((err) => setError({ ...err, firebaseErr: err.message }));
+    form.reset();
   };
   // ? handleGithubSignIn
   const handleGithubSignIn = () => {
